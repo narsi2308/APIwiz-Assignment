@@ -1,1 +1,67 @@
+1. There are several types of services available in Kubernetes, each serving a specific purpose:
+
+    1. ClusterIP: This is the default type of service . It exposes the Service on a cluster-internal IP. 
+                  The service is only accessible within the cluster.
+
+    2. NodePort: This type of service exposes the Service on each Node's IP at a static port.
+                  A NodePort service is accessible from outside the cluster using <NodeIP>:<NodePort>.
+
+    3.LoadBalancer: This service type automatically creates an external load balancer (like those provided by cloud providers such as AWS, GCP, Azure) 
+                    and assigns a fixed, external IP to the service. The service can be accessed externally (from outside the cluster) 
+                    using the load balancer's IP.
+
+
+
+2.  pod is the smallest unit in the Kubernetes that you can create or deploy. It represents a single instance of a running process in cluster,
+    which might consist of a single container or a small number of containers.
+
+
+3.     apiVersion: v1
+       kind: Pod
+       metadata:
+       name: mypod
+       spec:
+        containers:
+           - name: mycontainer
+             image: <image>
+             restartPolicy: Always     # This ensures the pod restarts automatically on failure
+
+
+
+4.    To access a custom application running on a specific port in Kubernetes, 
+      you typically need to create a Kubernetes Service and configure it to expose the application on that port
+
+                  apiVersion: v1
+                  kind: Service
+                  metadata:
+                     name: myservice
+                  spec:
+                    ports:
+                      - port: 80
+                        targetPort: 5000
+                        nodePort: 30007
+                   selector:
+                      app: two-tier
+                      type: NodePort
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
