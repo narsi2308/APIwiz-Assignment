@@ -1,3 +1,5 @@
 1. * if parent directory doesnot exit create a new directory bu using command "mkdir directory"
    than navigate to it using "cd" command
    * now create a child directory inside the parent directory using "mkdir" command with "-p" option .
+    ![linux 1qes](https://github.com/narsi2308/APIwiz-Assignment/assets/166526158/dcfffe4b-1b36-4983-a03e-bbe7d8d5be17)
+
