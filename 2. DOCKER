@@ -1,1 +1,70 @@
+1. * Docker is a platform designed to  create, deploy, and run applications using containers.
+     Containers allow  to package an application and its dependencies (libraries, binaries, configuration files, etc.) 
+     into a single unit. This ensures that the application will run reliably on any computing environment, 
+     whether it's a developer's laptop, a testing server, or a production server, regardless of the underlying operating system .
+
+    * Docker is widely used beacause:
+      1. Consistency: Docker containers ensure that the application runs consistently in different environments
+      2. Isolation: Containers provide a lightweight form of virtualization. Each container runs as a separate process and is isolated from others
+      3. Portability: Docker containers can run on any machine that has Docker installed, regardless of the underlying hardware or operating system
+      4. Scalability: Docker makes it straightforward to scale applications horizontally by running multiple containers across multiple machines, 
+          using Docker's orchestration tools like Docker Swarm or Kubernetes.
+
+2. FROM python:3.9-slim
+   WORKDIR /app
+   RUN apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+   COPY requirements.txt .
+   RUN pip install mysqlclient
+   RUN pip install -r requirements.txt
+   COPY . .
+   CMD ["python","app.py"]
+
+
+3. The Docker container lifecycle consists of several key stages that outline the process from creating a container to stopping and removing it.
+   Here are the main phases in the Docker container lifecycle:
+   1. create :  using the "docker create" or "docker run"
+   2. start: using the "docker start"
+   3. Pause and Unpause :  pause it using "docker pause" ,  resume it later using "docker unpause"
+   4. Stop: use the "docker stop"
+   5. Remove : use the "docker rm"
+
+
+4. * Images are used to package and distribute applications, while containers are used to run instances of those applications
+   * An image is a static, immutable file, whereas a container is a running instance of an image.
+   * Images are built, stored, and can be versioned in repositories (like Docker Hub).
+      Containers are created, started, stopped, and destroyed as needed.
+   * Images are designed to be unchangeable. If changes are required, a new image  is  created.
+     Containers can have some temporary state changes during their runtime, but these changes do not affect the image itself.
+
+
+
+5. To check the logs of a Docker container,  use the "docker logs" command followed by the container ID 
+   i.e docker logs <container_name_or_id>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
