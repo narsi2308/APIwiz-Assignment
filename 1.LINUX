@@ -3,7 +3,67 @@
    * now create a child directory inside the parent directory using "mkdir" command with "-p" option .
 
 
+2. * download package and its dependencies on your local machine with internet access
+   * Use a package manager like apt-get, yum,  to download the main package and its dependencies .
+   * apt-get install <package name> or yum install < package name>
+   * Copy the downloaded package file  to a portable storage device (USB drive, external HDD, etc.) that you can physically connect to the server.
+   * on the server with no internet access , copy the package files from the portable storage or local host machine to a directory on the server
+     and install the package.
+     ex:- sudo dpkg -i /path/to/package1.deb
 
-![linux 1qes](https://github.com/narsi2308/APIwiz-Assignment/assets/166526158/beba35b5-acf2-4c5e-8b63-957a9addd159)
+
+3. 1.- * using ssh (secure shell) , SSH is enabled and properly configured on Server A .
+       * On Server B and Server C, open a terminal or command prompt. Use the ssh command to connect to Server A
+         i.e ssh username@serverA_IP
+       * Once connected via SSH, navigate to the specific folder on Server A
+         cd folder/
+   2.-  * another method is setting  up a NFS (Network file sysyem )
+        * Install and configure NFS server on Server A ex:- sudo apt install nfs-kernel-server
+        * On Server B and Server C, install NFS client ex :- sudo apt install nfs-common
+        * Mount the NFS share from Server A to a local folder on Server B and Server C ex:- sudo mount serverA_IP:/path/folder  /local_folder
+
+
+
+ 4. * using "ps" command  , it shows a list of all running processes with detailed information including, CPU and memory usage, and the 
+      command associated with each process.
+    * using "top" command , it provides a dynamic real-time view of running processes. It continuously updates the list and shows system 
+      summary information as well 
+    * using "htop" command , it is an interactive process viewer for Unix systems. It provides a more user-friendly interface compared to 
+      "top"
+
+
+
+ 5. * To delete all files older than X days within a specific directory usinf "find" and "rm" command 
+    ex :- find /var/log -type f -mtime +7 -exec rm {} \;
+
+
+6. * #!/bin/bash
+
+       while true; do
+           # Prompt user for process ID
+           read -p "Enter process ID: " pid
+
+           # Check if the process exists
+           if ps -p $pid > /dev/null 2>&1; then
+           echo "Process $pid exists."
+           break
+           else
+           echo "Process $pid does not exist. Please enter another process ID."
+           fi
+       done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
