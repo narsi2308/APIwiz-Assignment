@@ -1,1 +1,95 @@
+pipeline script :-
+
+pipeline {
+    agent any
+    tools {
+        nodejs 'node'
+        }
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', changelog: false, credentialsId: 'a20b4cb7-480f-4b20-bf9d-------', poll: false, url: 'https://github.com/narsi2308/wizdesk.git'
+            }
+        }
+        stage('Install') {
+            steps{
+                sh "npm install"   
+            }
+        }
+        stage('Build') {
+            steps{
+                sh "npm run build"   
+            }
+        }
+        stage('Test') {
+            steps{
+                sh "npm test"
+         
+         stage('Docker Build Push') {
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'c2db24e2-264e--------', toolName: 'docker') {
+                        sh "docker build -t wizdesk -f docker/Dockerfile ."
+                        sh "docker tag wizdesk narsi23/wizdesk:latest"
+                        sh "docker push narsi23/wizdesk:latest"
+                    }
+                }    
+            }
+        }
+        stage('Docker Container') {
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'c2db24e2-264e---------', toolName: 'docker') {
+                        sh "docker run -d --name wizdesk -p 3000:3000 narsi23/wizdesk:latest"
+                    }
+                }    
+            }
+        }
+    }
+} 
+ 
+        
+    
+
+
+
+
+
+
+
+
+
+2.  create a file :  vi provider.tf                                                   
+
+    provider "aws" {
+    region= "us-east-1"
+    access_key = "----"
+    secret_key = "----"
+   }
+
+
+
+create a file : vi ec2.tf 
+
+resource "aws_instance" "my-instance" {
+ami = "ami-id"
+instance_type = "t2.micro"
+tags = {
+    Name = "nginx-instance"
+  }
+
+  // Security group for inbound HTTP (port 80) access
+
+  // User data script to install nginx on startup
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install -y nginx
+              sudo service nginx start
+              EOF
+}
+
+
+
+
 
