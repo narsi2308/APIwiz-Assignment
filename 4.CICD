@@ -1,4 +1,4 @@
-pipeline script :-
+pipeline script for CI/CD :-
 
 pipeline {
     agent any
