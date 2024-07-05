@@ -59,7 +59,10 @@ pipeline {
 
 
 
-2.  create a file :  vi provider.tf                                                   
+2. Automate to spin up a network and virtual machines by using terraform 
+
+
+  create a file :  vi provider.tf                                                   
 
     provider "aws" {
     region= "us-east-1"
